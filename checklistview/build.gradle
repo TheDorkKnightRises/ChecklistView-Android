@@ -10,8 +10,8 @@ ext {
 
     libraryDescription = 'Android library for adding add dynamic checklists to your app'
 
-    siteUrl = 'https://github.com/TheDorkKnightRises/ChecklistView'
-    gitUrl = 'https://github.com/TheDorkKnightRises/ChecklistView.git'
+    siteUrl = 'https://github.com/TheDorkKnightRises/ChecklistView-Android'
+    gitUrl = 'https://github.com/TheDorkKnightRises/ChecklistView-Android.git'
 
     libraryVersion = '0.1.0'
 
