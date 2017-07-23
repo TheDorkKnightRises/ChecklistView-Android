@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ChecklistView</string>
+    <string name="add_to_list">Add to list</string>
+</resources>

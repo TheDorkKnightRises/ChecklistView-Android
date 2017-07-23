@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'checklistview'
+    bintrayName = 'checklistview'
+
+    publishedGroupId = 'thedorkknightrises.lib'
+    libraryName = 'ChecklistView'
+    artifact = 'checklistview'
+
+    libraryDescription = 'Android library for adding add dynamic checklists to your app'
+
+    siteUrl = 'https://github.com/TheDorkKnightRises/ChecklistView'
+    gitUrl = 'https://github.com/TheDorkKnightRises/ChecklistView.git'
+
+    libraryVersion = '0.1.0'
+
+    developerId = 'TheDorkKnightRises'
+    developerName = 'Samriddha Basu'
+    developerEmail = 'samriddhabasu@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "0.1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.jmedeisis:draglinearlayout:1.1.0'
+    testCompile 'junit:junit:4.12'
+}
+
+apply from: 'install.gradle'
+apply from: 'bintray.gradle'
