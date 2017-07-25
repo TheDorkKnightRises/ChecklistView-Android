@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/TheDorkKnightRises/ChecklistView-Android'
     gitUrl = 'https://github.com/TheDorkKnightRises/ChecklistView-Android.git'
 
-    libraryVersion = android.defaultConfig.versionName
+    libraryVersion = '0.1.1'
 
     developerId = 'TheDorkKnightRises'
     developerName = 'Samriddha Basu'
