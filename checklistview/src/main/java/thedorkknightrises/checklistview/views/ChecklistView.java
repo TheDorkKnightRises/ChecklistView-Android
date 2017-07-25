@@ -1,6 +1,7 @@
 package thedorkknightrises.checklistview.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -30,6 +31,9 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
 
     public ChecklistView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ChecklistView);
+        itemBackground = array.getDrawable(R.styleable.ChecklistView_checkListItemBackground);
+        array.recycle();
         init(context);
     }
 
@@ -43,7 +47,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_checklist, this, true);
 
-        parent = (DragLinearLayout) findViewById(R.id.draggable_rootview);
+        parent = findViewById(R.id.draggable_rootview);
         addItem(false, true);
     }
 
@@ -73,6 +77,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
 
     @Override
     public void onChecklistItemRemoved(ChecklistItem item) {
+        parent.requestFocus();
         parent.removeView(item);
     }
 
@@ -89,6 +94,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
         item.delete.setVisibility(GONE);
         if (item.isEmpty()) {
             if (!parent.getChildAt(parent.getChildCount() - 1).equals(item)) {
+                parent.requestFocus();
                 parent.removeView(item);
             } else {
                 item.checkbox.setVisibility(GONE);
@@ -109,7 +115,4 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
         parent.setContainerScrollView(scrollView);
     }
 
-    public void setItemBackground(Drawable itemBackground) {
-        this.itemBackground = itemBackground;
-    }
 }
