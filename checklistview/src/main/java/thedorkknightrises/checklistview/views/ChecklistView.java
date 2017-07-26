@@ -115,4 +115,13 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
         parent.setContainerScrollView(scrollView);
     }
 
+    public void setChecklistItemBackground(Drawable drawable) {
+        itemBackground = drawable;
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            if (parent.getChildAt(i) instanceof ChecklistItem) {
+                parent.getChildAt(i).setBackground(drawable);
+            }
+        }
+    }
+
 }
