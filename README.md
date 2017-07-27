@@ -41,3 +41,7 @@ compile 'thedorkknightrises.lib:checklistview:0.1.2'
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+## Credits
+
+- [justasm/DragLinearLayout](https://github.com/justasm/DragLinearLayout)
