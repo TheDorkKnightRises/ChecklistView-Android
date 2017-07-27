@@ -78,7 +78,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
     @Override
     public void onChecklistItemRemoved(ChecklistItem item) {
         parent.requestFocus();
-        parent.removeView(item);
+        parent.removeDragView(item);
     }
 
     @Override
@@ -86,6 +86,8 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
         parent.setViewDraggable(item, item.dragHandle);
         if (!((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).isEmpty()) {
             addItem(false, true);
+        } else {
+            parent.getChildAt(parent.getChildCount() - 1).requestFocus();
         }
     }
 
@@ -93,12 +95,11 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
     public void onLostFocus(ChecklistItem item) {
         item.delete.setVisibility(GONE);
         if (item.isEmpty()) {
-            if (!parent.getChildAt(parent.getChildCount() - 1).equals(item)) {
-                parent.requestFocus();
-                parent.removeView(item);
-            } else {
+            if (parent.getChildAt(parent.getChildCount() - 1).equals(item)) {
                 item.checkbox.setVisibility(GONE);
                 item.add.setVisibility(VISIBLE);
+            } else {
+                item.delete.setVisibility(VISIBLE);
             }
         } else {
             item.checkbox.setVisibility(VISIBLE);
