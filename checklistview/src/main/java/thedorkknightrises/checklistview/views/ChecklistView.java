@@ -6,11 +6,15 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.jmedeisis.draglinearlayout.DragLinearLayout;
 
+import java.util.ArrayList;
+
+import thedorkknightrises.checklistview.ChecklistData;
 import thedorkknightrises.checklistview.R;
 import thedorkknightrises.checklistview.interfaces.OnChecklistEventListener;
 
@@ -123,6 +127,17 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
                 parent.getChildAt(i).setBackground(drawable);
             }
         }
+    }
+
+    public ArrayList<ChecklistData> getChecklistData() {
+        ArrayList<ChecklistData> arrayList = new ArrayList<>();
+        for (int i = 0; i < parent.getChildCount() - 1; i++) {
+            View child = parent.getChildAt(i);
+            if (child instanceof ChecklistItem) {
+                arrayList.add(new ChecklistData(((ChecklistItem) child).isChecked(), ((ChecklistItem) child).getText().toString()));
+            }
+        }
+        return arrayList;
     }
 
 }
