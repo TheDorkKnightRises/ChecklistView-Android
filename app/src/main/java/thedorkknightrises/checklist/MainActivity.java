@@ -1,16 +1,18 @@
 package thedorkknightrises.checklist;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import thedorkknightrises.checklistview.ChecklistData;
 import thedorkknightrises.checklistview.views.ChecklistView;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,8 +24,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ChecklistView checklistView = (ChecklistView) findViewById(R.id.checklistview);
+        final ChecklistView checklistView = (ChecklistView) findViewById(R.id.checklistview);
         checklistView.setContainerScrollView((ScrollView) findViewById(R.id.scrollView));
+
+        final TextView textView = (TextView) findViewById(R.id.text);
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textView.setText("");
+                ArrayList<ChecklistData> list = checklistView.getChecklistData();
+                for (ChecklistData i : list) {
+                    textView.append(i.getText() + " (Checked: " + i.isChecked() + ")\n");
+                }
+            }
+        });
     }
 
     @Override
