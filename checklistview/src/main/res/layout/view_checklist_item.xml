@@ -31,7 +31,7 @@
             android:background="@android:color/transparent"
             android:hint="@string/add_to_list"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="text|textCapSentences"
             android:padding="4dp" />
 
         <ImageButton
