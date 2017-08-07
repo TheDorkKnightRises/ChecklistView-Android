@@ -67,6 +67,18 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
         if (hasFocus) newItem.requestFocus();
     }
 
+    public void addItem(String text, boolean checked, boolean draggable, boolean hasFocus) {
+        ChecklistItem newItem = new ChecklistItem(context);
+        if (itemBackground != null) newItem.setBackground(itemBackground);
+        newItem.addListener(this);
+        if (draggable) {
+            parent.addDragView(newItem, newItem.dragHandle);
+        } else {
+            parent.addView(newItem);
+        }
+        if (hasFocus) newItem.requestFocus();
+    }
+
     public void setMoveCheckedToBottom(boolean moveCheckedToBottom) {
         this.moveCheckedToBottom = moveCheckedToBottom;
     }
@@ -138,6 +150,12 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
             }
         }
         return arrayList;
+    }
+
+    public void setChecklistData(ArrayList<ChecklistData> checklistDatas) {
+        for (ChecklistData data : checklistDatas) {
+            addItem(data.getText(), data.isChecked(), true, false);
+        }
     }
 
 }
