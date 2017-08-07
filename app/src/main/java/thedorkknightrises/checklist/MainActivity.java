@@ -38,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        ArrayList<ChecklistData> list = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            list.add(new ChecklistData(false, "Item " + i));
+        }
+        checklistView.setChecklistData(list);
     }
 
     @Override

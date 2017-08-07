@@ -68,7 +68,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
     }
 
     public void addItem(String text, boolean checked, boolean draggable, boolean hasFocus) {
-        ChecklistItem newItem = new ChecklistItem(context);
+        ChecklistItem newItem = new ChecklistItem(context, text, checked);
         if (itemBackground != null) newItem.setBackground(itemBackground);
         newItem.addListener(this);
         if (draggable) {
@@ -153,9 +153,14 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
     }
 
     public void setChecklistData(ArrayList<ChecklistData> checklistDatas) {
+        boolean adjustLastItem = ((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).add.getVisibility() == VISIBLE;
+        if (adjustLastItem)
+            parent.removeView(parent.getChildAt(parent.getChildCount() - 1));
         for (ChecklistData data : checklistDatas) {
             addItem(data.getText(), data.isChecked(), true, false);
         }
+        if (adjustLastItem)
+            addItem(false, false);
     }
 
 }

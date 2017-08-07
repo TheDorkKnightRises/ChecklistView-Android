@@ -44,18 +44,28 @@ public class ChecklistItem extends LinearLayout {
         init(context);
     }
 
+    public ChecklistItem(Context context, String text, boolean checked) {
+        super(context);
+        init(context);
+        editText.setText(text);
+        checkbox.setChecked(checked);
+        dragHandle.setVisibility(VISIBLE);
+        add.setVisibility(GONE);
+        checkbox.setVisibility(VISIBLE);
+    }
+
     public void init(final Context context) {
         this.context = context;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View view = inflater.inflate(R.layout.view_checklist_item, this, true);
 
-        rootView = (LinearLayout) view.findViewById(R.id.rootview);
-        checkbox = (AppCompatCheckBox) view.findViewById(R.id.checklist_item_checkbox);
-        add = (ImageButton) view.findViewById(R.id.checklist_item_add_icon);
-        editText = (EditText) view.findViewById(R.id.checklist_item_edittext);
-        delete = (ImageButton) view.findViewById(R.id.checklist_item_delete);
-        dragHandle = (ImageView) view.findViewById(R.id.checklist_item_drag_handle);
+        rootView = view.findViewById(R.id.rootview);
+        checkbox = view.findViewById(R.id.checklist_item_checkbox);
+        add = view.findViewById(R.id.checklist_item_add_icon);
+        editText = view.findViewById(R.id.checklist_item_edittext);
+        delete = view.findViewById(R.id.checklist_item_delete);
+        dragHandle = view.findViewById(R.id.checklist_item_drag_handle);
 
 
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
