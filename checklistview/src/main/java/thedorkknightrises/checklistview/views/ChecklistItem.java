@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import thedorkknightrises.checklistview.R;
-import thedorkknightrises.checklistview.interfaces.OnChecklistEventListener;
+import thedorkknightrises.checklistview.interfaces.OnChecklistItemEventListener;
 
 /**
  * Created by Samriddha on 23-07-2017.
@@ -32,7 +33,7 @@ public class ChecklistItem extends LinearLayout {
     EditText editText;
     ImageButton delete;
     ImageView dragHandle;
-    OnChecklistEventListener listener;
+    OnChecklistItemEventListener listener;
 
     public ChecklistItem(Context context) {
         super(context);
@@ -97,6 +98,23 @@ public class ChecklistItem extends LinearLayout {
             }
         });
 
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (listener != null) listener.onEdited(ChecklistItem.this);
+            }
+        });
+
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -121,7 +139,7 @@ public class ChecklistItem extends LinearLayout {
         if (listener != null) listener.onChecklistItemRemoved(ChecklistItem.this);
     }
 
-    public void addListener(OnChecklistEventListener listener) {
+    public void addListener(OnChecklistItemEventListener listener) {
         this.listener = listener;
     }
 

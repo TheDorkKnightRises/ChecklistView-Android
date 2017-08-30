@@ -16,17 +16,19 @@ import java.util.ArrayList;
 
 import thedorkknightrises.checklistview.ChecklistData;
 import thedorkknightrises.checklistview.R;
-import thedorkknightrises.checklistview.interfaces.OnChecklistEventListener;
+import thedorkknightrises.checklistview.interfaces.OnChecklistInteractionListener;
+import thedorkknightrises.checklistview.interfaces.OnChecklistItemEventListener;
 
 /**
  * Created by Samriddha on 23-07-2017.
  */
 
-public class ChecklistView extends LinearLayout implements OnChecklistEventListener {
+public class ChecklistView extends LinearLayout implements OnChecklistItemEventListener {
     Context context;
     DragLinearLayout parent;
     boolean moveCheckedToBottom;
     Drawable itemBackground;
+    OnChecklistInteractionListener listener;
 
     public ChecklistView(Context context) {
         super(context);
@@ -53,6 +55,10 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
 
         parent = findViewById(R.id.draggable_rootview);
         addItem(false, true);
+    }
+
+    public void addListener(OnChecklistInteractionListener listener) {
+        this.listener = listener;
     }
 
     public void addItem(boolean draggable, boolean hasFocus) {
@@ -85,6 +91,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
 
     @Override
     public void onChecklistItemChecked(ChecklistItem item, boolean checked) {
+        if (listener != null) listener.onChecklistItemChanged(item);
         if (moveCheckedToBottom) {
             parent.removeView(item);
             parent.addDragView(item, item.dragHandle);
@@ -126,6 +133,11 @@ public class ChecklistView extends LinearLayout implements OnChecklistEventListe
                 addItem(false, false);
             }
         }
+    }
+
+    @Override
+    public void onEdited(ChecklistItem item) {
+        if (listener != null) listener.onChecklistItemChanged(item);
     }
 
     public void setContainerScrollView(ScrollView scrollView) {
