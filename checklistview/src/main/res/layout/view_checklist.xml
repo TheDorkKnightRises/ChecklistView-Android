@@ -8,6 +8,5 @@
         android:clipChildren="false"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        android:padding="4dp" />
+        android:orientation="vertical" />
 </merge>

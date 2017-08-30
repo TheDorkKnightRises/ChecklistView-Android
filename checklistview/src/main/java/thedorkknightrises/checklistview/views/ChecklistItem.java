@@ -71,14 +71,15 @@ public class ChecklistItem extends LinearLayout {
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                listener.onChecklistItemChecked(ChecklistItem.this, isChecked);
+                if (listener != null)
+                    listener.onChecklistItemChecked(ChecklistItem.this, isChecked);
             }
         });
 
         add.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onEnterPressed(ChecklistItem.this);
+                if (listener != null) listener.onEnterPressed(ChecklistItem.this);
             }
         });
 
@@ -91,7 +92,7 @@ public class ChecklistItem extends LinearLayout {
                         delete.setVisibility(VISIBLE);
                     }
                 } else {
-                    listener.onLostFocus(ChecklistItem.this);
+                    if (listener != null) listener.onLostFocus(ChecklistItem.this);
                 }
             }
         });
@@ -100,7 +101,7 @@ public class ChecklistItem extends LinearLayout {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    listener.onEnterPressed(ChecklistItem.this);
+                    if (listener != null) listener.onEnterPressed(ChecklistItem.this);
                     return true;
                 } else {
                     return false;
@@ -117,7 +118,7 @@ public class ChecklistItem extends LinearLayout {
     }
 
     public void removeItem() {
-        listener.onChecklistItemRemoved(ChecklistItem.this);
+        if (listener != null) listener.onChecklistItemRemoved(ChecklistItem.this);
     }
 
     public void addListener(OnChecklistEventListener listener) {
