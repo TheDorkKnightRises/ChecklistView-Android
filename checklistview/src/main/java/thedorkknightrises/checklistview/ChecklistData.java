@@ -60,4 +60,13 @@ public class ChecklistData implements Parcelable {
         dest.writeString(text);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof ChecklistData && ((ChecklistData) obj).getText().equals(text) && ((ChecklistData) obj).isChecked() == checked);
+    }
+
+    @Override
+    public String toString() {
+        return text + " (" + checked + ")";
+    }
 }

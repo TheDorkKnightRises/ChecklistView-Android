@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity implements OnChecklistIntera
         final ChecklistView checklistView = findViewById(R.id.checklistview);
         checklistView.addListener(this);
         checklistView.setContainerScrollView((ScrollView) findViewById(R.id.scrollView));
+        final ArrayList<ChecklistData> arrayList = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            arrayList.add(new ChecklistData(false, "Item " + i));
+        }
+        checklistView.setChecklistData(arrayList);
 
         final TextView textView = findViewById(R.id.text);
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
@@ -40,14 +45,10 @@ public class MainActivity extends AppCompatActivity implements OnChecklistIntera
                 for (ChecklistData i : list) {
                     textView.append(i.getText() + " (Checked: " + i.isChecked() + ")\n");
                 }
+                Log.e(getLocalClassName(), "Same as original values? " + list.equals(arrayList));
             }
         });
 
-        ArrayList<ChecklistData> list = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
-            list.add(new ChecklistData(false, "Item " + i));
-        }
-        checklistView.setChecklistData(list);
     }
 
     @Override
