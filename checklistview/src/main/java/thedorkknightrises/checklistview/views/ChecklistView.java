@@ -155,9 +155,9 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
 
     public ArrayList<ChecklistData> getChecklistData() {
         ArrayList<ChecklistData> arrayList = new ArrayList<>();
-        for (int i = 0; i < parent.getChildCount() - 1; i++) {
+        for (int i = 0; i < parent.getChildCount(); i++) {
             View child = parent.getChildAt(i);
-            if (child instanceof ChecklistItem) {
+            if (child instanceof ChecklistItem && !((ChecklistItem) child).getText().toString().trim().equals("")) {
                 arrayList.add(new ChecklistData(((ChecklistItem) child).isChecked(), ((ChecklistItem) child).getText().toString()));
             }
         }
