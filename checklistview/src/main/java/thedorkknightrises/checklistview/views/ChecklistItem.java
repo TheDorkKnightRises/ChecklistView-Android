@@ -68,7 +68,6 @@ public class ChecklistItem extends LinearLayout {
         delete = view.findViewById(R.id.checklist_item_delete);
         dragHandle = view.findViewById(R.id.checklist_item_drag_handle);
 
-
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -89,7 +88,7 @@ public class ChecklistItem extends LinearLayout {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     dragHandle.setVisibility(GONE);
-                    if (!isEmpty()) {
+                    if (add.getVisibility() != VISIBLE) {
                         delete.setVisibility(VISIBLE);
                     }
                 } else {

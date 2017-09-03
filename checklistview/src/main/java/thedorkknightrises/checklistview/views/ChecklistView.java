@@ -85,6 +85,10 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
         if (hasFocus) newItem.requestFocus();
     }
 
+    public void clear() {
+        parent.removeAllViews();
+    }
+
     public void setMoveCheckedToBottom(boolean moveCheckedToBottom) {
         this.moveCheckedToBottom = moveCheckedToBottom;
     }
@@ -107,7 +111,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
     @Override
     public void onEnterPressed(ChecklistItem item) {
         parent.setViewDraggable(item, item.dragHandle);
-        if (!((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).isEmpty()) {
+        if (((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).add.getVisibility() != VISIBLE) {
             addItem(false, true);
         } else {
             parent.getChildAt(parent.getChildCount() - 1).requestFocus();
@@ -118,7 +122,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
     public void onLostFocus(ChecklistItem item) {
         item.delete.setVisibility(GONE);
         if (item.isEmpty()) {
-            if (parent.getChildAt(parent.getChildCount() - 1).equals(item)) {
+            if ((parent.getChildCount() != 0) && parent.getChildAt(parent.getChildCount() - 1).equals(item)) {
                 item.checkbox.setVisibility(GONE);
                 item.add.setVisibility(VISIBLE);
             } else {
@@ -129,7 +133,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
             item.add.setVisibility(GONE);
             parent.setViewDraggable(item, item.dragHandle);
             item.dragHandle.setVisibility(VISIBLE);
-            if (!((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).isEmpty()) {
+            if (((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).add.getVisibility() != VISIBLE) {
                 addItem(false, false);
             }
         }
@@ -165,14 +169,11 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
     }
 
     public void setChecklistData(ArrayList<ChecklistData> checklistDatas) {
-        boolean adjustLastItem = ((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).add.getVisibility() == VISIBLE;
-        if (adjustLastItem)
-            parent.removeView(parent.getChildAt(parent.getChildCount() - 1));
+        clear();
         for (ChecklistData data : checklistDatas) {
             addItem(data.getText(), data.isChecked(), true, false);
         }
-        if (adjustLastItem)
-            addItem(false, false);
+        addItem(false, false);
     }
 
 }

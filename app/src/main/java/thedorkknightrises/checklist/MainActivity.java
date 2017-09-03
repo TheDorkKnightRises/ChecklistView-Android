@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnChecklistIntera
                     textView.append(i.getText() + " (Checked: " + i.isChecked() + ")\n");
                 }
                 Log.e(getLocalClassName(), "Same as original values? " + list.equals(arrayList));
+                checklistView.setChecklistData(list);
             }
         });
 
