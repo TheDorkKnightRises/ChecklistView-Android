@@ -111,11 +111,12 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
     @Override
     public void onEnterPressed(ChecklistItem item) {
         parent.setViewDraggable(item, item.dragHandle);
-        if (((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).add.getVisibility() != VISIBLE) {
-            addItem(false, true);
-        } else {
-            parent.getChildAt(parent.getChildCount() - 1).requestFocus();
+        if (!((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).isEmpty()) {
+            if (((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).add.getVisibility() == VISIBLE) {
+                ((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).listener.onLostFocus(((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)));
+            }
         }
+        parent.getChildAt(parent.getChildCount() - 1).requestFocus();
     }
 
     @Override

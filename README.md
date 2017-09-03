@@ -12,7 +12,7 @@ Add the dependency to your project
 Just add the following line in the `dependencies` block of your module-level `build.gradle` file
 
 ```
-compile 'thedorkknightrises.lib:checklistview:0.3.6'
+compile 'thedorkknightrises.lib:checklistview:0.3.7'
 ```
 
 ### Maven
@@ -21,7 +21,7 @@ compile 'thedorkknightrises.lib:checklistview:0.3.6'
 <dependency>
   <groupId>thedorkknightrises.lib</groupId>
   <artifactId>checklistview</artifactId>
-  <version>0.3.6</version>
+  <version>0.3.7</version>
   <type>pom</type>
 </dependency>
 ```
