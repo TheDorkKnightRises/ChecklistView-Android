@@ -12,7 +12,7 @@ Add the dependency to your project
 Just add the following line in the `dependencies` block of your module-level `build.gradle` file
 
 ```
-compile 'thedorkknightrises.lib:checklistview:0.3.7'
+compile 'thedorkknightrises.lib:checklistview:0.4.0'
 ```
 
 ### Maven
@@ -21,7 +21,7 @@ compile 'thedorkknightrises.lib:checklistview:0.3.7'
 <dependency>
   <groupId>thedorkknightrises.lib</groupId>
   <artifactId>checklistview</artifactId>
-  <version>0.3.7</version>
+  <version>0.4.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -43,5 +43,7 @@ compile 'thedorkknightrises.lib:checklistview:0.3.7'
     limitations under the License.
 
 ## Credits
+
+This library makes use of the following open source project(s):
 
 - [justasm/DragLinearLayout](https://github.com/justasm/DragLinearLayout)

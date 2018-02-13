@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/TheDorkKnightRises/ChecklistView-Android'
     gitUrl = 'https://github.com/TheDorkKnightRises/ChecklistView-Android.git'
 
-    libraryVersion = '0.4'
+    libraryVersion = '0.4.0'
 
     developerId = 'TheDorkKnightRises'
     developerName = 'Samriddha Basu'
@@ -31,7 +31,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName "0.4"
+        versionName "0.4.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
