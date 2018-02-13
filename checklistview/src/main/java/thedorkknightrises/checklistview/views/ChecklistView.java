@@ -29,6 +29,7 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
     boolean moveCheckedToBottom;
     Drawable itemBackground;
     OnChecklistInteractionListener listener;
+    boolean editable = true;
 
     public ChecklistView(Context context) {
         super(context);
@@ -134,7 +135,8 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
             item.add.setVisibility(GONE);
             parent.setViewDraggable(item, item.dragHandle);
             item.dragHandle.setVisibility(VISIBLE);
-            if (((ChecklistItem) parent.getChildAt(parent.getChildCount() - 1)).add.getVisibility() != VISIBLE) {
+            ChecklistItem i = (ChecklistItem) parent.getChildAt(parent.getChildCount() - 1);
+            if (i != null && i.add.getVisibility() != VISIBLE) {
                 addItem(false, false);
             }
         }
@@ -175,6 +177,26 @@ public class ChecklistView extends LinearLayout implements OnChecklistItemEventL
             addItem(data.getText(), data.isChecked(), true, false);
         }
         addItem(false, false);
+        setEditable(editable);
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View child = parent.getChildAt(i);
+            if (child instanceof ChecklistItem) {
+                if ("".equals(((ChecklistItem) child).editText.getText().toString().trim())) {
+                    child.setVisibility(editable ? VISIBLE : GONE);
+                }
+                ChecklistItem item = (ChecklistItem) child;
+                item.editText.setFocusable(editable);
+                item.editText.setFocusableInTouchMode(editable);
+                item.editText.setClickable(editable);
+                item.editText.setLongClickable(editable);
+                item.checkbox.setEnabled(editable);
+                item.dragHandle.setVisibility(editable ? VISIBLE : GONE);
+            }
+        }
     }
 
 }

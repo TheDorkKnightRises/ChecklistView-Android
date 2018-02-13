@@ -1,6 +1,7 @@
 package thedorkknightrises.checklist;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -9,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements OnChecklistIntera
                     textView.append(i.getText() + " (Checked: " + i.isChecked() + ")\n");
                 }
                 Log.e(getLocalClassName(), "Same as original values? " + list.equals(arrayList));
-                checklistView.setChecklistData(list);
             }
         });
 
@@ -68,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements OnChecklistIntera
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.about) {
-            Toast.makeText(this, "Sample app for ChecklistView library by Samriddha Basu (TheDorkKnightRises)", Toast.LENGTH_LONG).show();
+            new AlertDialog.Builder(this)
+                    .setMessage("Sample app for ChecklistView library by Samriddha Basu (TheDorkKnightRises)")
+                    .show();
             return true;
         }
 

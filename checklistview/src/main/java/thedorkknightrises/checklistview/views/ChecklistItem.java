@@ -3,14 +3,15 @@ package thedorkknightrises.checklistview.views;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,7 +29,7 @@ import thedorkknightrises.checklistview.interfaces.OnChecklistItemEventListener;
 public class ChecklistItem extends LinearLayout {
     Context context;
     LinearLayout rootView;
-    AppCompatCheckBox checkbox;
+    CheckBox checkbox;
     ImageButton add;
     EditText editText;
     ImageButton delete;
@@ -83,6 +84,9 @@ public class ChecklistItem extends LinearLayout {
             }
         });
 
+        editText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
         editText.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -91,6 +95,7 @@ public class ChecklistItem extends LinearLayout {
                     if (add.getVisibility() != VISIBLE) {
                         delete.setVisibility(VISIBLE);
                     }
+                    editText.setSelection(editText.getText().length());
                 } else {
                     if (listener != null) listener.onLostFocus(ChecklistItem.this);
                 }
